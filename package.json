@@ -21,7 +21,6 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.9.7",
     "prisma": "^5.13.0",
     "validator": "^13.11.0"
   },
