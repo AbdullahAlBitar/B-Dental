@@ -14,7 +14,7 @@ async function login(phone, password) {
         return null;
     }
 
-    if(bcrypt.compare(password, doctor.password) === true) {
+    if(await bcrypt.compare(password, doctor.password)) {
         return doctor;
     }else {
         return null;
