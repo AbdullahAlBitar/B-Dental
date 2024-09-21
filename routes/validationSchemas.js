@@ -1,7 +1,9 @@
 const Joi = require('joi');
 
 const signInSchema = Joi.object({
-  phone: Joi.string().pattern(/^[0-9]+$/).required(),
+  phone: Joi.string().pattern(/^[0-9]+$/).required().messages({
+    'string.pattern.base': 'Only numbers are allowed for the phone field'
+  }),
   password: Joi.string().required(),
 });
 
