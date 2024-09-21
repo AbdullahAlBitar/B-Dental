@@ -1,0 +1,73 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model patient {
+  id         Int         @id @default(autoincrement())
+  name       String
+  phone      String
+  birth      DateTime
+  sex        String
+  payments   payment[]
+  visits     visit[]
+  Casephotos Casephoto[]
+  createdAt  DateTime    @default(now())
+}
+
+model Doctor {
+  id        Int       @id @default(autoincrement())
+  name      String
+  phone     String    @unique
+  password  String
+  payments  payment[]
+  visits    visit[]
+  createdAt DateTime  @default(now())
+}
+
+model payment {
+  id         Int      @id @default(autoincrement())
+  patient_id Int
+  doctor_id  Int
+  amount     Float
+  date       DateTime
+  patient    patient  @relation(fields: [patient_id], references: [id])
+  Doctor     Doctor   @relation(fields: [doctor_id], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model visit {
+  id          Int         @id @default(autoincrement())
+  name        String
+  date        DateTime
+  doctor_id   Int
+  patient_id  Int
+  description String
+  charge      Float
+  patient     patient     @relation(fields: [patient_id], references: [id])
+  Doctor      Doctor      @relation(fields: [doctor_id], references: [id])
+  Casephotos  Casephoto[]
+  createdAt   DateTime    @default(now())
+}
+
+model Casephoto {
+  id         Int      @id @default(autoincrement())
+  patient_id Int
+  visit_id   Int
+  type       String
+  imageUrl   String
+  date       DateTime
+  patient    patient  @relation(fields: [patient_id], references: [id])
+  visit      visit    @relation(fields: [visit_id], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+enum ptype {
+  IntraOral
+  ExtraOral
+  XRay
+}
