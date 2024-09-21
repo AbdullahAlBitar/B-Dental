@@ -23,7 +23,7 @@ async function handleError(err, res, req) {
     console.log(error.stack);
     res.status(500).json({ error: 'An unknown error occurred' });
   }
-
+  console.log(error_message);
 }
 
 module.exports = { handleError };
