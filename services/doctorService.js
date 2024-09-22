@@ -26,7 +26,7 @@ async function register(name, phone, password) {
         data: {
             name,
             phone,
-            password: bcrypt.hash(password, bcrypt.genSalt(10))
+            password: bcrypt.hash(password,10)
         }
     })
 
