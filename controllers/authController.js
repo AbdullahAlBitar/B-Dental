@@ -7,7 +7,7 @@ const maxAge = 60 * 60 * 1000;
 
 const doctorService = require('../services/doctorService');
 
-async function register(req, res) {
+async function register(req, res, next) {
     try {
         const { name, phone, password } = req.body;
 
@@ -16,7 +16,7 @@ async function register(req, res) {
         return res.status(201);
 
     } catch (error) {
-        await handleError(error, res);
+        await next(error);
     }
 }
 
