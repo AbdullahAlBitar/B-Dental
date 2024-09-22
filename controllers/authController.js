@@ -40,6 +40,7 @@ async function login(req, res, next) {
         const user = await doctorService.login(phone, password);
         
         if (!user) {
+            console.log(`${phone} couldn't logIn`);
             let error = new Error("Not Found");
             error.meta = { code: "404", error: 'Wrong phone or password' };
             throw error;
@@ -49,7 +50,6 @@ async function login(req, res, next) {
         return res.status(201).json({jwt: token});
 
     } catch (error) {   
-        console.log(`${phone} couldn't logIn`);
         next(error);
     }
 }
