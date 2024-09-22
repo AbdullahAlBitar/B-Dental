@@ -7,6 +7,7 @@ const cors = require('cors');
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientRoutes");
 const visitRoutes = require("./routes/visitRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const { handleError } = require("./middleware/errorMiddleware");
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/visits", visitRoutes);
+app.use("/payments", paymentRoutes);
 
 app.use(authenticateJWT);
 
