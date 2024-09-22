@@ -13,7 +13,7 @@ async function register(req, res, next) {
 
         const newDoctor = await doctorService.register(name, phone, password);
 
-        return res.status(201);
+        return res.status(201).json({"sucsses": true});
 
     } catch (error) {
         await next(error);
