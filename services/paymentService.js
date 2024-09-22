@@ -1,6 +1,23 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+async function getAll(id) {
+    return await prisma.payment.findMany({
+        include: {
+            Doctor: {
+                select: {
+                    name:true
+                }
+            },
+            patient: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    });
+}
+
 async function getPaymentById(id) {
     return await prisma.payment.findUnique({
         where: {
@@ -44,5 +61,6 @@ async function getPaymentProfile(id) {
 
 module.exports = {
     getPaymentById,
-    getPaymentProfile
+    getPaymentProfile,
+    getAll
 };

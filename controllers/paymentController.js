@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 const paymentService = require('../services/paymentService');
 
 const getPayments = async (req, res) => {
-  const payments = await prisma.payment.findMany();
+  const payments = await paymentService.getAll();
   return res.status(200).json(payments);
 };
 
