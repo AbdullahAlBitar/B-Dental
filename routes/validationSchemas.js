@@ -7,6 +7,15 @@ const signInSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const signUpSchema = Joi.object({
+  phone: Joi.string().pattern(/^[0-9]+$/).required().messages({
+    'string.pattern.base': 'Only numbers are allowed for the phone field'
+  }),
+  name: Joi.string().required(),
+  password: Joi.string().required(),
+  cPassword: Joi.ref('password'),
+});
+
 // // key
 // const keySchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -160,4 +169,5 @@ const signInSchema = Joi.object({
 
 module.exports = {
   signInSchema,
+  signUpSchema
 };
