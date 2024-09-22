@@ -13,6 +13,7 @@ const { handleError } = require("./middleware/errorMiddleware");
 const authenticateJWT = require('./middleware/authMiddleware');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(express.json());
@@ -49,8 +50,8 @@ async function testDatabaseConnection() {
 async function startApp() {
   const isConnected = await testDatabaseConnection();
   if (isConnected) {
-    app.listen(3000, () => {
-      console.log('Server listening on port 3000');
+    app.listen(port, () => {
+      console.log('Server listening on port ',port);
     });
   } else {
     console.log('Server not started due to database connection failure');
