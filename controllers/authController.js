@@ -7,28 +7,18 @@ const maxAge = 60 * 60 * 1000;
 
 const doctorService = require('../services/doctorService');
 
-// async function register(req, res) {
-//     try {
-//         const { name, email, password, rPassword, role } = req.body;
-//         await notEmpty(name, email, password, rPassword);
-//         await matchPassword(password, rPassword);
+async function register(req, res) {
+    try {
+        const { name, phone, password } = req.body;
 
-//         const newUser = await prisma.user.create({
-//             data: {
-//                 name,
-//                 email,
-//                 password
-//             },
-//         });
+        const newDoctor = await doctorService.register(name, phone, password);
 
-//         const token = jwt.sign({ userId: newUser.id, role: role || "User" }, secretKey, { expiresIn: '1h' });
-//         res.cookie("jwt", token,  { httpOnly: true, maxAge: maxAge });
-//         res.status(201).json({ message: 'User created successfully' });
+        return res.status(201);
 
-//     } catch (error) {
-//         await handleError(error, res);
-//     }
-// }
+    } catch (error) {
+        await handleError(error, res);
+    }
+}
 
 
 async function login(req, res, next) {
@@ -59,4 +49,4 @@ async function logout(req, res) {
     res.json({logout : "True"});
 }
 
-module.exports = { login, logout };
+module.exports = { login, logout, register };

@@ -21,6 +21,18 @@ async function login(phone, password) {
     }
 }
 
+async function register(name, phone, password) {
+    const doctor = await prisma.doctor.create({
+        data: {
+            name,
+            phone,
+            password: bcrypt.hash(password, bcrypt.genSalt(10))
+        }
+    })
+
+    return doctor;
+}
+
 async function getDoctorById(id) {
     return await prisma.doctor.findUnique({
         where: {
@@ -75,5 +87,6 @@ async function getDoctorProfile(id) {
 module.exports = {
     login,
     getDoctorById,
-    getDoctorProfile
+    getDoctorProfile,
+    register
 };
