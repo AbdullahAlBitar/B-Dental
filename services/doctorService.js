@@ -22,11 +22,13 @@ async function login(phone, password) {
 }
 
 async function register(name, phone, password) {
+    password = bcrypt.hash(password,10);
+
     const doctor = await prisma.doctor.create({
         data: {
             name,
             phone,
-            password: bcrypt.hash(password,10)
+            password
         }
     })
 
