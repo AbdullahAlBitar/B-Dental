@@ -15,7 +15,7 @@ const authenticateJWT = (req, res, next) => {
     try {
         const decoded = jwt.verify(token, secretKey);
         req.user = decoded;
-        console.log(`${decoded.role} ID: ${decoded.id}, is authorized`);
+        console.log(`${decoded.role}, ID: ${decoded.id}, is authorized`);
         
         next();
     } catch (error) {

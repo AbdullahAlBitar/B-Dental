@@ -33,22 +33,23 @@ const doctorService = require('../services/doctorService');
 
 async function login(req, res, next) {
     try {
-        console.log("in login");
-        
         const { phone, password } = req.body;
 
+        console.log(`${phone} is trying to logIn`);
+        
         const user = await doctorService.login(phone, password);
-
+        
         if (!user) {
             let error = new Error("Not Found");
             error.meta = { code: "404", error: 'Wrong phone or password' };
             throw error;
         }
-        const token = jwt.sign({ id: user.id, role: "doctor" }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, role: "Doctor" }, secretKey, { expiresIn: '1h' });
         res.cookie("jwt", token,  { httpOnly: true, maxAge: maxAge});
         return res.status(201).json({jwt: token});
 
-    } catch (error) {    
+    } catch (error) {   
+        console.log(`${phone} couldn't logIn`);
         next(error);
     }
 }
