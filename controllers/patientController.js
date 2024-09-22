@@ -5,7 +5,7 @@ const patientService = require('../services/patientService');
 
 const getPatients = async (req, res) => {
   const patients = await prisma.patient.findMany();
-  res.render('patients/list', { patients, title: 'Patient List' });
+  return res.status(200).json(patients);
 };
 
 const getPatientById = async (req, res) => {
