@@ -9,7 +9,7 @@ const getPatients = async (req, res) => {
 };
 
 const getPatientById = async (req, res) => {
-  const { id } = req.user;
+  const { id } = req.params;
   const patient = await patientService.getPatientById(parseInt(id));
   return res.status(200).json(patient);
 };

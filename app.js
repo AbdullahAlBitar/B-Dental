@@ -22,11 +22,11 @@ app.use(express.json());
 //app.use('/uploads', express.static('./uploads'));
 
 app.use("/auth", authRoutes);
-app.use("/visits", visitRoutes);
-app.use("/payments", paymentRoutes);
 
 app.use(authenticateJWT);
 
+app.use("/visits", visitRoutes);
+app.use("/payments", paymentRoutes);
 app.use("/doctors", doctorRoutes);
 app.use("/patients", patientRoutes);
 

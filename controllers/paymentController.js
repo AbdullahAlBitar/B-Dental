@@ -9,7 +9,7 @@ const getPayments = async (req, res) => {
 };
 
 const getPaymentById = async (req, res) => {
-  const { id } = req.user;
+  const { id } = req.params;
   const payment = await paymentService.getPaymentById(parseInt(id));
   return res.status(200).json(payment);
 };
