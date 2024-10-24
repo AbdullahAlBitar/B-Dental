@@ -3,7 +3,7 @@ npm install
 npx prisma migrate dev --name "init"
 npx prisma generate
 
-note : always make sure XAMPP MySQL server is runing
+note : always make sure XAMPP MySQL server is runing (if using MySQL)
 
 -----------------------------------------------------
 
