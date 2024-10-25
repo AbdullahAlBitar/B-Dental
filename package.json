@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pop": "npx prisma migrate dev --name init && node populate.js && node app.js"
+    "pop": "node populate.js && node app.js"
   },
   "keywords": [],
   "author": "",
