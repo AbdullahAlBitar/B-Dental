@@ -16,6 +16,12 @@ const signUpSchema = Joi.object({
   cPassword: Joi.ref('password'),
 });
 
+const patientUpdate = Joi.object({
+  name: Joi.string().optional(),
+  sex: Joi.string().valid('Male', 'Female').optional(),
+  birth: Joi.string().optional()
+})
+
 // // key
 // const keySchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -169,5 +175,6 @@ const signUpSchema = Joi.object({
 
 module.exports = {
   signInSchema,
-  signUpSchema
+  signUpSchema,
+  patientCreateOrUpdate: patientUpdate
 };

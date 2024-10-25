@@ -10,14 +10,14 @@ const getPayments = async (req, res) => {
 
 const getPaymentById = async (req, res) => {
   const { id } = req.params;
-  const payment = await paymentService.getPaymentById(parseInt(id));
+  const payment = await paymentService.getPaymentById(id);
   return res.status(200).json(payment);
 };
 
 const getPaymentProfile = async (req, res) => {
   const id = req.params.id;
   
-  const paymentProfile = await paymentService.getPaymentProfile(parseInt(id));
+  const paymentProfile = await paymentService.getPaymentProfile(id);
   //console.log("payment profile : ", paymentProfile);
     
   return res.status(200).json(paymentProfile);

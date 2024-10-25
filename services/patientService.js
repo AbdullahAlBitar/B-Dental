@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 async function getPatientById(id) {
     return await prisma.patient.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
 }
@@ -12,7 +12,7 @@ async function getPatientById(id) {
 async function getPatientProfile(id) {
     const patient = await prisma.patient.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
     if (!patient) return null;
@@ -71,7 +71,21 @@ async function getPatientProfile(id) {
     }
 }
 
+async function updatePatient(id, name, birth, sex) {
+    return await prisma.patient.update({
+        where: {
+            id: parseInt(id)
+        },
+        data: {
+            name: name != '' ? name : undefined,
+            birth: birth != '' ? (new Date(birth)).toISOString() : undefined,
+            sex: sex != '' ? sex : undefined
+        }
+    })
+}
+
 module.exports = {
     getPatientById,
-    getPatientProfile
+    getPatientProfile,
+    updatePatient
 };

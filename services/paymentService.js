@@ -21,7 +21,7 @@ async function getAll(id) {
 async function getPaymentById(id) {
     return await prisma.payment.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
 }
@@ -29,7 +29,7 @@ async function getPaymentById(id) {
 async function getPaymentProfile(id) {
     const payment = await prisma.payment.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
         include : {
             Doctor :{

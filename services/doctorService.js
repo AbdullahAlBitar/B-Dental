@@ -38,7 +38,7 @@ async function register(name, phone, password) {
 async function getDoctorById(id) {
     return await prisma.doctor.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
 }
@@ -46,7 +46,7 @@ async function getDoctorById(id) {
 async function getDoctorProfile(id) {
     const doctor = await prisma.doctor.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
     if(!doctor) return null;

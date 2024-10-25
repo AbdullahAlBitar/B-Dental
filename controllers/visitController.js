@@ -10,14 +10,14 @@ const getVisits = async (req, res) => {
 
 const getVisitById = async (req, res) => {
   const { id } = req.user;
-  const visit = await visitService.getVisitById(parseInt(id));
+  const visit = await visitService.getVisitById(id);
   return res.status(200).json(visit);
 };
 
 const getVisitProfile = async (req, res) => {
   const id = req.params.id;
   
-  const visitProfile = await visitService.getVisitProfile(parseInt(id));
+  const visitProfile = await visitService.getVisitProfile(id);
   //console.log("visit profile : ", visitProfile);
     
   return res.status(200).json(visitProfile);

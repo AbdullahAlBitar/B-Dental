@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 async function getVisitById(id) {
     return await prisma.visit.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
     });
 }
@@ -12,7 +12,7 @@ async function getVisitById(id) {
 async function getVisitProfile(id) {
     const visit = await prisma.visit.findUnique({
         where: {
-            id,
+            id: parseInt(id),
         },
         include : {
             Doctor :{
