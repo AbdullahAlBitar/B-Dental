@@ -6,8 +6,8 @@ const prisma = new PrismaClient();
 async function main() {
     // Delete all existing data in the database
     await prisma.payment.deleteMany({});
-    await prisma.visit.deleteMany({});
     await prisma.casephoto.deleteMany({});
+    await prisma.visit.deleteMany({});
     await prisma.patient.deleteMany({});
     await prisma.doctor.deleteMany({});
 
