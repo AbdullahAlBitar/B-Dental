@@ -10,9 +10,10 @@ async function getPatientById(id) {
 }
 
 async function getPatientProfile(id) {
+    id = parseInt(id)
     const patient = await prisma.patient.findUnique({
         where: {
-            id: parseInt(id),
+            id: id,
         },
     });
     if (!patient) return null;
