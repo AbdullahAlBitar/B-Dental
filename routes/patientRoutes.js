@@ -4,7 +4,8 @@ const patientController = require('../controllers/patientController');
 const router = express.Router();
 
 router.get('/', patientController.getPatients);
-router.post('/:id', patientController.getPatientById);
+router.get('/:id', patientController.getPatientById);
+// router.post('/:id', patientController.);
 router.patch('/:id', patientController.updatePatient);
 router.post('/profile/:id', patientController.getPatientProfile);
 // router.get('/:id/edit', patientController.getEditPatientForm);
