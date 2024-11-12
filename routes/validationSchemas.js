@@ -22,6 +22,15 @@ const patientUpdate = Joi.object({
   birth: Joi.string().optional()
 })
 
+const patientCreate = Joi.object({
+  name: Joi.string().required(),
+  sex: Joi.string().valid('Male', 'Female').required(),
+  birth: Joi.string().required(),
+  phone: Joi.string().pattern(/^[0-9]+$/).required().messages({
+    'string.pattern.base': 'Only numbers are allowed for the phone field'
+  }),
+})
+
 // // key
 // const keySchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -176,5 +185,6 @@ const patientUpdate = Joi.object({
 module.exports = {
   signInSchema,
   signUpSchema,
-  patientCreateOrUpdate: patientUpdate
+  patientUpdate,
+  patientCreate
 };

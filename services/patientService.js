@@ -85,8 +85,20 @@ async function updatePatient(id, name, birth, sex) {
     })
 }
 
+async function createPatient(name, phone, birth, sex) {
+    return await prisma.patient.create({
+        data: {
+            name,
+            phone,
+            sex,
+            birth: (new Date(birth)).toISOString()
+        }
+    })
+}
+
 module.exports = {
     getPatientById,
     getPatientProfile,
-    updatePatient
+    updatePatient,
+    createPatient
 };

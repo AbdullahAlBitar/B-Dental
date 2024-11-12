@@ -32,9 +32,18 @@ const updatePatient = async (req, res) => {
   return res.status(200).json(updatedPatient.id);
 }
 
+const createPatient = async (req, res) => {
+  const { name, phone, birth, sex } = req.body;
+
+  const newPatient = await patientService.createPatient(name, phone, birth, sex);
+
+  return res.status(200).json(newPatient.id);
+}
+
 module.exports = {
   getPatients,
   getPatientById,
   getPatientProfile,
-  updatePatient
+  updatePatient,
+  createPatient
 };
