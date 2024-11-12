@@ -31,6 +31,18 @@ const patientCreate = Joi.object({
   }),
 })
 
+const paymentCreate = Joi.object({
+  patient_id: Joi.number().required(),
+  doctor_id: Joi.number().required(),
+  amount: Joi.number().positive().required(),
+  date: Joi.string().required()
+});
+
+const paymentUpdate = Joi.object({
+  amount: Joi.number().positive().optional(),
+  date: Joi.string().optional()
+});
+
 // // key
 // const keySchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -186,5 +198,7 @@ module.exports = {
   signInSchema,
   signUpSchema,
   patientUpdate,
-  patientCreate
+  patientCreate,
+  paymentCreate,
+  paymentUpdate
 };

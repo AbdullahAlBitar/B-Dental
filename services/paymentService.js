@@ -59,8 +59,33 @@ async function getPaymentProfile(id) {
     }
 }
 
+async function createPayment(patient_id, doctor_id, amount, date) {
+    return await prisma.payment.create({
+        data: {
+            patient_id: parseInt(patient_id),
+            doctor_id: parseInt(doctor_id),
+            amount: parseFloat(amount),
+            date: new Date(date).toISOString()
+        }
+    });
+}
+
+async function updatePayment(id, amount, date) {
+    return await prisma.payment.update({
+        where: {
+            id: parseInt(id)
+        },
+        data: {
+            amount: amount ? parseFloat(amount) : undefined,
+            date: date ? new Date(date).toISOString() : undefined
+        }
+    });
+}
+
 module.exports = {
     getPaymentById,
     getPaymentProfile,
-    getAll
+    getAll,
+    createPayment,
+    updatePayment
 };

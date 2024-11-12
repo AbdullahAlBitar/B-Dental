@@ -23,8 +23,27 @@ const getPaymentProfile = async (req, res) => {
   return res.status(200).json(paymentProfile);
 };
 
+const createPayment = async (req, res) => {
+  const { patient_id, doctor_id, amount, date } = req.body;
+  
+  const newPayment = await paymentService.createPayment(patient_id, doctor_id, amount, date);
+  
+  return res.status(200).json(newPayment.id);
+};
+
+const updatePayment = async (req, res) => {
+  const id = req.params.id;
+  const { amount, date } = req.body;
+  
+  const updatedPayment = await paymentService.updatePayment(id, amount, date);
+  
+  return res.status(200).json(updatedPayment.id);
+};
+
 module.exports = {
   getPayments,
   getPaymentById,
   getPaymentProfile,
+  createPayment,
+  updatePayment
 };
