@@ -67,7 +67,7 @@ async function getPatientProfile(id) {
         phone: patient.phone,
         dues: (totalCharge - paymentAmount) || -1,
         sex: patient.sex,
-        birth: patient.birth,
+        birth: patient.birth.toISOString(),
         visits: visits || [],
         payments: payments || []
     }
