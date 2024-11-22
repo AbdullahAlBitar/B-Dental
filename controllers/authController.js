@@ -49,4 +49,8 @@ async function logout(req, res) {
     res.json({logout : "True"});
 }
 
-module.exports = { login, logout, register };
+async function token(req, res) {
+    return res.status(200).json({stauts: "Valid"});
+}
+
+module.exports = { login, logout, register, token };
