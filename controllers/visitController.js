@@ -23,8 +23,28 @@ const getVisitProfile = async (req, res) => {
   return res.status(200).json(visitProfile);
 };
 
+const createVisit = async (req, res) => {
+  const id = req.user.id;
+  const { patient_id ,phone, name, description, date, charge } = req.body;
+  
+  const newVisit = await visitService.createVisit(patient_id, phone, id, name, charge, date, description);
+  
+  return res.status(200).json(newVisit.id);
+};
+
+const updateVisit = async (req, res) => {
+  const id = req.params.id;
+  const { name, description, charge, date } = req.body;
+  
+  const updatedVisit = await visitService.updateVisit(id, name,description, charge, date);
+  
+  return res.status(200).json(updatedVisit.id);
+};
+
 module.exports = {
   getVisits,
   getVisitById,
   getVisitProfile,
+  createVisit,
+  updateVisit
 };

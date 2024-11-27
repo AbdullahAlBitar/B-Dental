@@ -24,9 +24,10 @@ const getPaymentProfile = async (req, res) => {
 };
 
 const createPayment = async (req, res) => {
-  const { patient_id, doctor_id, amount, date } = req.body;
+  const id = req.user.id;
+  const { patient_id ,phone, amount, date } = req.body;
   
-  const newPayment = await paymentService.createPayment(patient_id, doctor_id, amount, date);
+  const newPayment = await paymentService.createPayment(patient_id, phone, id, amount, date);
   
   return res.status(200).json(newPayment.id);
 };

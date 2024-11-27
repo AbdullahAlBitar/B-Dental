@@ -32,11 +32,17 @@ const patientCreate = Joi.object({
 })
 
 const paymentCreate = Joi.object({
-  patient_id: Joi.number().required(),
-  doctor_id: Joi.number().required(),
+  patient_id: Joi.number(),
+  phone: Joi.string().pattern(/^[0-9]+$/).messages({
+    'string.pattern.base': 'Only numbers are allowed for the phone field'
+  }),
   amount: Joi.number().positive().required(),
-  date: Joi.string().required()
-});
+  date: Joi.string().required(),
+}).xor('patient_id', 'phone') // Require either patient_id or phone, but not both
+  .messages({
+    'object.missing': 'Either phone or patient_id is required',
+    'object.xor': 'Only one of phone or patient_id is allowed',
+  });
 
 const paymentUpdate = Joi.object({
   amount: Joi.number().positive().optional(),

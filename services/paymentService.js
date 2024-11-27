@@ -59,10 +59,24 @@ async function getPaymentProfile(id) {
     }
 }
 
-async function createPayment(patient_id, doctor_id, amount, date) {
+async function createPayment(patient_id, phone, doctor_id, amount, date) {
+
+    if(patient_id == undefined){
+        const patient = await prisma.patient.findUnique({
+            where: { phone: phone }
+        });
+    
+        if (!patient) {
+            let error = new Error("Not Found");
+            error.meta = { code: "404", error: `No patient found with phone number: ${phone}` };
+            throw error;
+        }
+        patient_id = patient.id;
+    }
+
     return await prisma.payment.create({
         data: {
-            patient_id: parseInt(patient_id),
+            patient_id: patient_id,
             doctor_id: parseInt(doctor_id),
             amount: parseFloat(amount),
             date: new Date(date).toISOString()

@@ -44,7 +44,49 @@ async function getVisitProfile(id) {
     }
 }
 
+async function createVisit(patient_id, phone, id, name, charge, date, description) {
+    if(patient_id == undefined){
+        const patient = await prisma.patient.findUnique({
+            where: { phone: phone }
+        });
+    
+        if (!patient) {
+            let error = new Error("Not Found");
+            error.meta = { code: "404", error: `No patient found with phone number: ${phone}` };
+            throw error;
+        }
+        patient_id = patient.id;
+    }
+
+    return await prisma.visit.create({
+        data: {
+            patient_id: parseInt(patient_id),
+            doctor_id: parseInt(id),
+            name,
+            charge: parseFloat(charge),
+            data: new Date(date).toISOString(),
+            description
+        }
+    })
+}
+
+async function updateVisit(id, name,description, charge, date) {
+    return await prisma.visit.update({
+        where: {
+            id: parseInt(id),
+        },
+        data: {
+            name,
+            description,
+            charge: parseFloat(charge),
+            data: new Date(date).toISOString(),
+        }
+    })
+}
+
 module.exports = {
     getVisitById,
-    getVisitProfile
+    getVisitProfile,
+    createVisit,
+    updateVisit
 };
