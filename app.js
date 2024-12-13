@@ -3,6 +3,8 @@ const prisma = new PrismaClient();
 
 const express = require("express");
 const cors = require('cors');
+require('dotenv').config();
+
 
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientRoutes");

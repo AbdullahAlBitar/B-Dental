@@ -1,23 +1,21 @@
 const multer = require('multer');
 const { google } = require('googleapis');
 
-const apikeys = require('../apikeys.json');
 const SCOPE = ['https://www.googleapis.com/auth/drive'];
 
 // Configure multer for file uploads
-const upload = multer({ dest: 'uploads/' }); // Temporary storage
+const upload = multer({ dest: 'uploads/' });
 
-// A Function that can provide access to google drive api
+// Updated authorize function to use env variables
 async function authorize() {
     const jwtClient = new google.auth.JWT(
-        apikeys.client_email,
+        process.env.GOOGLE_CLIENT_EMAIL,
         null,
-        apikeys.private_key,
+        process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'), // Handle escaped newlines
         SCOPE
     );
 
     await jwtClient.authorize();
-
     return jwtClient;
 }
 
