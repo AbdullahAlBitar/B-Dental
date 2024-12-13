@@ -9,6 +9,7 @@ const patientRoutes = require("./routes/patientRoutes");
 const visitRoutes = require("./routes/visitRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const authRoutes = require("./routes/authRoutes");
+const casePhotoRoutes = require("./routes/casePhotoRoutes");
 
 const { handleError } = require("./middleware/errorMiddleware");
 const authenticateJWT = require('./middleware/authMiddleware');
@@ -19,9 +20,8 @@ const port = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.use(express.json());
 
-//app.use('/uploads', express.static('./uploads'));
-
 app.use("/auth", authRoutes);
+app.use("/casePhotos", casePhotoRoutes);
 
 app.use(authenticateJWT);
 

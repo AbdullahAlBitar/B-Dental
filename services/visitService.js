@@ -31,6 +31,18 @@ async function getVisitProfile(id) {
     });
     if (!visit) return null;
 
+    const casePhotos = await prisma.casephoto.findMany({
+        where:{
+            visit_id : parseInt(id)
+        },
+        select: {
+            id: true,
+            date: true,
+            imageUrl: true,
+            type: true
+        }
+    })
+
     return {
         name: visit.name,
         description: visit.description,
@@ -41,6 +53,7 @@ async function getVisitProfile(id) {
         patient_name: visit.patient.name,
         patient_sex: visit.patient.sex,
         patient_phone: visit.patient.phone,
+        case_photos: casePhotos
     }
 }
 
@@ -57,19 +70,17 @@ async function createVisit(patient_id, phone, id, name, charge, date, descriptio
         }
         patient_id = patient.id;
     }
-
     return await prisma.visit.create({
         data: {
             patient_id: parseInt(patient_id),
             doctor_id: parseInt(id),
             name,
             charge: parseFloat(charge),
-            data: new Date(date).toISOString(),
+            date: new Date(date).toISOString(),
             description
         }
     })
 }
-
 async function updateVisit(id, name,description, charge, date) {
     return await prisma.visit.update({
         where: {
@@ -79,7 +90,7 @@ async function updateVisit(id, name,description, charge, date) {
             name,
             description,
             charge: parseFloat(charge),
-            data: new Date(date).toISOString(),
+            date: new Date(date).toISOString(),
         }
     })
 }

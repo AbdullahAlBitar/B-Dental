@@ -60,7 +60,6 @@ async function getPaymentProfile(id) {
 }
 
 async function createPayment(patient_id, phone, doctor_id, amount, date) {
-
     if(patient_id == undefined){
         const patient = await prisma.patient.findUnique({
             where: { phone: phone }
@@ -73,7 +72,6 @@ async function createPayment(patient_id, phone, doctor_id, amount, date) {
         }
         patient_id = patient.id;
     }
-
     return await prisma.payment.create({
         data: {
             patient_id: patient_id,
