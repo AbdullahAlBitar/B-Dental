@@ -1,5 +1,5 @@
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -8,7 +8,7 @@ generator client {
 }
 
 model patient {
-  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  id         Int         @id @default(autoincrement())
   name       String
   phone      String      @unique
   birth      DateTime
@@ -20,7 +20,7 @@ model patient {
 }
 
 model Doctor {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int       @id @default(autoincrement())
   name      String
   phone     String    @unique
   password  String
@@ -30,9 +30,9 @@ model Doctor {
 }
 
 model payment {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient_id String   @db.ObjectId
-  doctor_id  String   @db.ObjectId
+  id         Int       @id @default(autoincrement())
+  patient_id Int   
+  doctor_id  Int   
   amount     Float
   date       DateTime
   patient    patient  @relation(fields: [patient_id], references: [id])
@@ -41,11 +41,11 @@ model payment {
 }
 
 model visit {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int       @id @default(autoincrement())
   name        String
   date        DateTime
-  doctor_id   String      @db.ObjectId
-  patient_id  String      @db.ObjectId
+  doctor_id   Int
+  patient_id  Int
   description String
   charge      Float
   patient     patient     @relation(fields: [patient_id], references: [id])
@@ -55,9 +55,9 @@ model visit {
 }
 
 model Casephoto {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient_id String   @db.ObjectId
-  visit_id   String   @db.ObjectId
+  id         Int       @id @default(autoincrement())
+  patient_id Int
+  visit_id   Int
   type       String
   imageUrl   String
   date       DateTime
