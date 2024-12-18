@@ -13,7 +13,7 @@ model patient {
   phone      String      @unique
   birth      DateTime
   sex        String
-  status     pStatus
+  status     pStatus     @default(Active)
   payments   Payment[]
   visits     visit[]
   Casephotos Casephoto[]

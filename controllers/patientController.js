@@ -40,11 +40,23 @@ const createPatient = async (req, res) => {
   return res.status(200).json(newPatient.id);
 }
 
-const deletePatient = async (req, res) => {
-  const id = req.params.id;
-  const deletedPatient = await patientService.deletePatient(id);
-  return res.status(200).json(deletePatient.id);
+const deletePatient = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+
+    // if(patientService.hasBills(id)){
+    //   let error = new Error("Has Bills");
+    //   error.meta = { code: "400", error: 'Patient has unpayed bills' };
+    //   throw error;
+    // }
+    const deletedPatient = await patientService.deletePatient(id);
+
+    return res.status(200).json(deletedPatient.id);
+  } catch (error) {
+    next(error);
+  }
 }
+
 
 module.exports = {
   getPatients,

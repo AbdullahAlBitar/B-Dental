@@ -75,7 +75,7 @@ async function main() {
                 data: {
                     patient_id: patient.id,
                     visit_id: visit.id,
-                    type: 'X-Ray',
+                    type: 'XRay',
                     imageUrl: `https://example.com/xray_${patient.id}_${visit.id}.jpg`,
                     date: new Date(),
                 },
