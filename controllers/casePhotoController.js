@@ -45,10 +45,17 @@ const uploadPhoto = async (req, res) => {
     return res.status(200).json(newPhoto.id);
 };
 
+const deletePhoto = async (req, res)=> {
+    const id = req.params.id;
+    const deletedPhoto = await casePhotoService.deletePhoto(id);
+    return res.status(200).json(deletedPhoto.id);
+}
+
 module.exports = {
     getPhotos,
     getPhotoById,
     getPhotosByVisit,
     getPhotosByPatient,
-    uploadPhoto
+    uploadPhoto,
+    deletePhoto
 };

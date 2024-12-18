@@ -41,10 +41,17 @@ const updatePayment = async (req, res) => {
   return res.status(200).json(updatedPayment.id);
 };
 
+const deletePayment = async (req, res) =>{
+  const id = req.params.id;
+  const deletedPayment = await paymentService.deletePayment(id);
+  return res.status(200).json(deletedPayment.id);
+}
+
 module.exports = {
   getPayments,
   getPaymentById,
   getPaymentProfile,
   createPayment,
-  updatePayment
+  updatePayment,
+  deletePayment
 };

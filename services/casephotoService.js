@@ -66,10 +66,21 @@ async function uploadPhoto(patientId, visitId, photoUrl, type, date) {
     });
 }
 
+async function deletePhoto(id) {
+    id = parseInt(id);
+    // TODO :: delete from cloude
+    return await prisma.casephoto.delete({
+        where:{
+            id
+        }
+    })
+}
+
 module.exports = {
     getAll,
     getPhotoById,
     getPhotosByVisit,
     getPhotosByPatient,
-    uploadPhoto
+    uploadPhoto,
+    deletePhoto
 };

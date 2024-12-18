@@ -13,6 +13,6 @@ router.patch('/:id', validate(paymentUpdate), paymentController.updatePayment);
 // router.get('/:id/edit', paymentController.getEditPaymentForm);
 // router.post('/', paymentController.createPayment);
 // router.post('/:id', paymentController.updatePayment);
-// router.delete('/:id', paymentController.deletePayment);
+router.delete('/:id', paymentController.deletePayment);
 
 module.exports = router;

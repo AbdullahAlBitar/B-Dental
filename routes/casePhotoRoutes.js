@@ -8,5 +8,7 @@ router.get('/:id', casePhotoController.getPhotoById);
 router.get('/visit/:id', casePhotoController.getPhotosByVisit);
 router.get('/patient/:id', casePhotoController.getPhotosByPatient);
 router.post('/', photoUploader.upload.single('photo'), casePhotoController.uploadPhoto)
+router.delete('/:id', casePhotoController.deletePhoto);
+
 
 module.exports = router;

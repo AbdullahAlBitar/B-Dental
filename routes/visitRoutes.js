@@ -11,6 +11,6 @@ router.get('/profile/:id', visitController.getVisitProfile);
 // router.get('/:id/edit', visitController.getEditVisitForm);
 // router.post('/', visitController.createVisit);
 // router.post('/:id', visitController.updateVisit);
-// router.delete('/:id', visitController.deleteVisit);
+router.delete('/:id', visitController.deleteVisit);
 
 module.exports = router;

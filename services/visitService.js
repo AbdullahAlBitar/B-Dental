@@ -95,9 +95,25 @@ async function updateVisit(id, name,description, charge, date) {
     })
 }
 
+async function deleteVisit(id) {
+    id = parseInt(id);
+    await prisma.casephoto.deleteMany({
+        where:{
+            visit_id: id
+        }
+    });
+
+    return await prisma.visit.delete({
+        where: {
+            id
+        }
+    });
+}
+
 module.exports = {
     getVisitById,
     getVisitProfile,
     createVisit,
-    updateVisit
+    updateVisit,
+    deleteVisit
 };

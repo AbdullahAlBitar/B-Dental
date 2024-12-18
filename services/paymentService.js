@@ -94,10 +94,20 @@ async function updatePayment(id, amount, date) {
     });
 }
 
+async function deletePayment(id) {
+    id = parseInt(id);
+    return await prisma.payment.delete({
+        where: {
+            id
+        }
+    })
+}
+
 module.exports = {
     getPaymentById,
     getPaymentProfile,
     getAll,
     createPayment,
-    updatePayment
+    updatePayment,
+    deletePayment
 };

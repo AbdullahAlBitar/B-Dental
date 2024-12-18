@@ -39,11 +39,17 @@ const updateVisit = async (req, res) => {
   
   return res.status(200).json(updatedVisit.id);
 };
+const deleteVisit = async (req, res)=>{
+  const id = req.params.id;
+  const deletedVisit = await visitService.deleteVisit(id);
+  return res.status(200).json(deletedVisit.id);
+}
 
 module.exports = {
   getVisits,
   getVisitById,
   getVisitProfile,
   createVisit,
-  updateVisit
+  updateVisit,
+  deleteVisit
 };

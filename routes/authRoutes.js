@@ -6,7 +6,7 @@ const { signInSchema, signUpSchema } = require('./validationSchemas');
 const authenticateJWT = require('../middleware/authMiddleware');
 
 router.post('/login', validate(signInSchema), authController.login);
-router.post('/signup', validate(signUpSchema), authController.register);
+// router.post('/signup', validate(signUpSchema), authController.register);
 router.get('/token', authenticateJWT, authController.token);
 router.get('/logout', authController.logout);
 
