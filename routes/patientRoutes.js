@@ -12,6 +12,6 @@ router.patch('/:id',validate(patientUpdate), patientController.updatePatient);
 router.get('/profile/:id', patientController.getPatientProfile);
 // router.get('/:id/edit', patientController.getEditPatientForm);
 // router.post('/', patientController.createPatient);
-// router.delete('/:id', patientController.deletePatient);
+router.delete('/:id', patientController.deletePatient);
 
 module.exports = router;

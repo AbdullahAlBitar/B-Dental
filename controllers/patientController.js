@@ -40,10 +40,17 @@ const createPatient = async (req, res) => {
   return res.status(200).json(newPatient.id);
 }
 
+const deletePatient = async (req, res) => {
+  const id = req.params.id;
+  const deletedPatient = await patientService.deletePatient(id);
+  return res.status(200).json(deletePatient.id);
+}
+
 module.exports = {
   getPatients,
   getPatientById,
   getPatientProfile,
   updatePatient,
-  createPatient
+  createPatient,
+  deletePatient
 };

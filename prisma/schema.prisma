@@ -13,7 +13,8 @@ model patient {
   phone      String      @unique
   birth      DateTime
   sex        String
-  payments   payment[]
+  status     pStatus
+  payments   Payment[]
   visits     visit[]
   Casephotos Casephoto[]
   createdAt  DateTime    @default(now())
@@ -24,12 +25,12 @@ model Doctor {
   name      String
   phone     String    @unique
   password  String
-  payments  payment[]
+  payments  Payment[]
   visits    visit[]
   createdAt DateTime  @default(now())
 }
 
-model payment {
+model Payment {
   id         Int       @id @default(autoincrement())
   patient_id Int   
   doctor_id  Int   
@@ -58,7 +59,7 @@ model Casephoto {
   id         Int       @id @default(autoincrement())
   patient_id Int
   visit_id   Int
-  type       String
+  type       cpType
   imageUrl   String
   date       DateTime
   patient    patient  @relation(fields: [patient_id], references: [id])
@@ -66,8 +67,13 @@ model Casephoto {
   createdAt  DateTime @default(now())
 }
 
-enum ptype {
+enum cpType {
   IntraOral
   ExtraOral
   XRay
+}
+
+enum pStatus {
+  Active
+  Deleted
 }

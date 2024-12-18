@@ -23,10 +23,10 @@ app.use(express.static("public"));
 app.use(express.json());
 
 app.use("/auth", authRoutes);
-app.use("/casePhotos", casePhotoRoutes);
 
 app.use(authenticateJWT);
 
+app.use("/casePhotos", casePhotoRoutes);
 app.use("/visits", visitRoutes);
 app.use("/payments", paymentRoutes);
 app.use("/doctors", doctorRoutes);
