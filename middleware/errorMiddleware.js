@@ -20,7 +20,8 @@ async function handleError(err, res, req) {
     res.status(409).json(error.meta);
   } else {
     error_message = error;
-    console.log(error.stack);
+    console.log("unknown error :")
+    console.log(error);
     res.status(500).json({ error: 'An unknown error occurred' });
   }
   console.log(error_message);
