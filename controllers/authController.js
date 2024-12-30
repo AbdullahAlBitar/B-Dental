@@ -13,6 +13,8 @@ async function register(req, res, next) {
 
         const newDoctor = await doctorService.register(name, phone, password);
 
+        console.log(`User Id : ${newDoctor.id}, Phone : ${newDoctor.phone}, registered Successfully`);
+        
         return res.status(201).json({"sucsses": true});
 
     } catch (error) {
@@ -27,16 +29,19 @@ async function login(req, res, next) {
 
         console.log(`${phone} is trying to logIn`);
         
-        const user = await doctorService.login(phone, password);
+        const doctor = await doctorService.login(phone, password);
         
-        if (!user) {
+        if (!doctor) {
             console.log(`${phone} couldn't logIn`);
             let error = new Error("Not Found");
             error.meta = { code: "404", error: 'Wrong phone or password' };
             throw error;
         }
-        const token = jwt.sign({ id: user.id, role: "Doctor" }, secretKey, { expiresIn: '1h' });
+        const token = jwt.sign({ id: doctor.id, role: "Doctor" }, secretKey, { expiresIn: '1h' });
         res.cookie("jwt", token,  { httpOnly: true, maxAge: maxAge});
+
+        console.log(`Doctor Id : ${doctor.id}, Phone : ${doctor.phone}, logedin Successfully`);
+
         return res.status(201).json({jwt: token});
 
     } catch (error) {   

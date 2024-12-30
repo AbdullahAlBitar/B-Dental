@@ -31,9 +31,9 @@ model Doctor {
 }
 
 model Payment {
-  id         Int       @id @default(autoincrement())
-  patient_id Int   
-  doctor_id  Int   
+  id         Int      @id @default(autoincrement())
+  patient_id Int
+  doctor_id  Int
   amount     Float
   date       DateTime @default(now())
   patient    patient  @relation(fields: [patient_id], references: [id])
@@ -42,9 +42,9 @@ model Payment {
 }
 
 model visit {
-  id          Int       @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   name        String
-  date        DateTime  @default(now())
+  date        DateTime    @default(now())
   doctor_id   Int
   patient_id  Int
   description String
@@ -56,7 +56,7 @@ model visit {
 }
 
 model Casephoto {
-  id         Int       @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   patient_id Int
   visit_id   Int
   type       cpType
