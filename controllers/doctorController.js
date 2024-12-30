@@ -15,7 +15,7 @@ const getDoctorProfile = async (req, res) => {
   const { id } = req.user;
   
   const doctorProfile = await doctorService.getDoctorProfile(id);
-  console.log(`Doctor profile Id : ${doctorProfile.id}, profile found`);
+  console.log(`Doctor profile Id : ${id}, profile found`);
   
   return res.status(200).json(doctorProfile);
 };

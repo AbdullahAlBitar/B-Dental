@@ -22,7 +22,7 @@ const getPatientProfile = async (req, res) => {
   const id = req.params.id;
   
   const patientProfile = await patientService.getPatientProfile(id);
-  console.log(`Patient profile Id : ${patientProfile.id}, found`);
+  console.log(`Patient profile Id : ${id}, found`);
     
   return res.status(200).json(patientProfile);
 };

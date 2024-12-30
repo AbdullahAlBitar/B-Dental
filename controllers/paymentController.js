@@ -22,7 +22,7 @@ const getPaymentProfile = async (req, res) => {
   const id = req.params.id;
   
   const paymentProfile = await paymentService.getPaymentProfile(id);
-  console.log(`Payment profile Id : ${paymentProfile.id}, found`);
+  console.log(`Payment profile Id : ${id}, found`);
 
     
   return res.status(200).json(paymentProfile);

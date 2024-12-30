@@ -22,7 +22,7 @@ const getVisitProfile = async (req, res) => {
   const id = req.params.id;
   
   const visitProfile = await visitService.getVisitProfile(id);
-  console.log(`Visit profile Id : ${visitProfile.id}, found`);
+  console.log(`Visit profile Id : ${id}, found`);
     
   return res.status(200).json(visitProfile);
 };
